@@ -45,14 +45,13 @@ const Canvas = props => {
         props.parentCallback({ imgId: props.img.id, dotX: (x * 100 / imgWidth), dotY: (y * 100 / imgHeight) });
     }
 
-
     return (
         <>
             <div className='canvas-img'>
                 <div className='canvas-container'>
                     {
                         props.dots?.length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
-                            <div className='canvas-dot' style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
+                            <div className={`canvas-dot ${(e.imgId == props.croppedImgHover.imgId && e.dotX + e.dotY == props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''}`} style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
                         ))
                     }
 

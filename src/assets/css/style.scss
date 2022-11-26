@@ -31,12 +31,12 @@ body {
         flex-direction: column;
         margin-bottom: 14px;
 
-        label{
+        label {
             font-size: 14px;
             margin-bottom: 4px;
         }
 
-        .form-control{
+        .form-control {
             padding: 5px 10px;
         }
     }
@@ -48,7 +48,8 @@ body {
         border-radius: 5px;
         cursor: pointer;
 
-        &:disabled, &.disabled{
+        &:disabled,
+        &.disabled {
             background-color: #6c6c6c;
             cursor: initial;
         }
@@ -135,6 +136,10 @@ body {
             background-color: #fff;
             box-shadow: 0 0 10px black;
             transform: translate(-8px, -8px);
+
+            &.hover {
+                background-color: green;
+            }
 
             &:before,
             &:after {

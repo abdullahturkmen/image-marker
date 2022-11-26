@@ -32,12 +32,23 @@ const CropDot = props => {
     }
 
 
+    const handleCanvasMouseEnter = () => {
+        props.cropDotMouseEnterCallback(props.details)
+    }
+
+    const handleCanvasMouseLeave = () => {
+        props.cropDotMouseLeaveCallback(props.details)
+    }
+
+
     return (
         <>
             <div onClick={
                 () => croppedImgClick(props.details)
             }>
-                <canvas ref={cropDotCanvas}
+                <canvas onMouseEnter={handleCanvasMouseEnter}
+                    onMouseLeave={handleCanvasMouseLeave}
+                    ref={cropDotCanvas}
                     width="50px"
                     height="50px"/>
             </div>

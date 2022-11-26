@@ -9,6 +9,7 @@ const App = () => {
     const [bigImg, setBigImg] = useState(null);
     const [imgsMarks, setImgsMarks] = useState([]);
     const [selectCroppedImg, setSelectCroppedImg] = useState([]);
+    const [hoverCroppedImg, setHoverCroppedImg] = useState([]);
     const [dotTitle, setDotTitle] = useState('');
     const [dotDescription, setDotDescription] = useState('');
     const dotFormRef = useRef(null);
@@ -71,7 +72,7 @@ const App = () => {
 
 
     const handleCanvasCallback = (childData) => {
-  
+
         setSelectCroppedImg(childData)
         setImgsMarks([
             ...imgsMarks,
@@ -88,6 +89,14 @@ const App = () => {
             setDotTitle('')
             setDotDescription('')
         }
+    }
+
+    const handleCropDotMouseEnterCallback = (childData) => {
+        setHoverCroppedImg(childData)
+    }
+
+    const handleCropDotMouseLeaveCallback = (childData) => {
+        setHoverCroppedImg([])
     }
 
     useEffect(() => {
@@ -121,16 +130,15 @@ const App = () => {
 
     useEffect(() => {
         function handleClickOutside(event) {
-          if (dotFormRef.current && !dotFormRef.current.contains(event.target)) {
-            setSelectCroppedImg([])
-          }
+            if (dotFormRef.current && ! dotFormRef.current.contains(event.target)) {
+                setSelectCroppedImg([])
+            }
         }
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+        return() => {
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [dotFormRef]);
-
+    }, [dotFormRef]);
 
 
     return (
@@ -150,31 +158,33 @@ const App = () => {
             {
             selectCroppedImg.imgId != null && (
                 <div className='dot-detail-form'>
-                    <form onSubmit={addDotDetail} ref={dotFormRef}>
-                    <div className="dot-detail-form-element">
-                        <label for="exampleInputEmail1" className="form-label">Title</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1"
-                            value={dotTitle}
-                            onChange={
-                                e => setDotTitle(e.target.value)
-                            }/>
-                    </div>
-                    <div className="dot-detail-form-element">
-                        <label for="exampleInputPassword1" className="form-label">Description</label>
-                        <textarea type="text" className="form-control" id="exampleInputPassword1"
-                        value={dotDescription}
-                            onChange={
-                                e => setDotDescription(e.target.value)
-                            }/>
-                    </div>
+                    <form onSubmit={addDotDetail}
+                        ref={dotFormRef}>
+                        <div className="dot-detail-form-element">
+                            <label for="exampleInputEmail1" className="form-label">Title</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1"
+                                value={dotTitle}
+                                onChange={
+                                    e => setDotTitle(e.target.value)
+                                }/>
+                        </div>
+                        <div className="dot-detail-form-element">
+                            <label for="exampleInputPassword1" className="form-label">Description</label>
+                            <textarea type="text" className="form-control" id="exampleInputPassword1"
+                                value={dotDescription}
+                                onChange={
+                                    e => setDotDescription(e.target.value)
+                                }/>
+                        </div>
 
-                    <button type="submit" className="save-modal-btn"
-                        disabled={
-                            !dotTitle || !dotDescription
-                    }>Save</button>
-                    <div className='delete-dot-btn' onClick={deleteDot}>🗑</div>
-                    <div className='close-modal-btn' onClick={() => setSelectCroppedImg([])}>&#10006;</div>
-                </form>
+                        <button type="submit" className="save-modal-btn">Save</button>
+                        <div className='delete-dot-btn'
+                            onClick={deleteDot}>🗑</div>
+                        <div className='close-modal-btn'
+                            onClick={
+                                () => setSelectCroppedImg([])
+                        }>&#10006;</div>
+                    </form>
                 </div>
             )
         }
@@ -189,6 +199,12 @@ const App = () => {
                         <CropDot img={bigImg}
                             details={e}
                             key={index}
+                            cropDotMouseEnterCallback={
+                                (x) => handleCropDotMouseEnterCallback(x)
+                            }
+                            cropDotMouseLeaveCallback={
+                                (x) => handleCropDotMouseLeaveCallback(x)
+                            }
                             cropDotCallback={
                                 (x) => handleCropDotCallback(x)
                             }/>
@@ -197,6 +213,7 @@ const App = () => {
 
                 <Canvas img={bigImg}
                     dots={imgsMarks}
+                    croppedImgHover={hoverCroppedImg}
                     parentCallback={
                         (e) => handleCanvasCallback(e)
                     }/>
