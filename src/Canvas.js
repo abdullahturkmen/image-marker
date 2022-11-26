@@ -52,7 +52,7 @@ const Canvas = props => {
                 <div className='canvas-container'>
                     {
                         props.dots?.length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
-                            <div className='canvas-dot' style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index}></div>
+                            <div className='canvas-dot' style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
                         ))
                     }
 

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useRef, useEffect, useState} from 'react';
 import Canvas from 'Canvas';
 import CropDot from 'CropDot';
 
@@ -11,7 +11,7 @@ const App = () => {
     const [selectCroppedImg, setSelectCroppedImg] = useState([]);
     const [dotTitle, setDotTitle] = useState('');
     const [dotDescription, setDotDescription] = useState('');
-
+    const dotFormRef = useRef(null);
 
     useEffect(() => {
 
@@ -56,6 +56,11 @@ const App = () => {
         setSelectedImgs([...selectedImgs]);
     }
 
+    const selectBigImg = (e) => {
+        setBigImg(e)
+        setSelectCroppedImg([])
+    }
+
     const generateKey = () => {
         return `${
             new Date().getTime()
@@ -66,6 +71,8 @@ const App = () => {
 
 
     const handleCanvasCallback = (childData) => {
+  
+        setSelectCroppedImg(childData)
         setImgsMarks([
             ...imgsMarks,
             childData
@@ -75,7 +82,7 @@ const App = () => {
     const handleCropDotCallback = (childData) => {
         if (selectCroppedImg != null && selectCroppedImg.dotX + selectCroppedImg.dotY != childData.dotX + childData.dotY) {
             setSelectCroppedImg(childData)
-            
+
         } else {
             setSelectCroppedImg([])
             setDotTitle('')
@@ -84,13 +91,12 @@ const App = () => {
     }
 
     useEffect(() => {
-        console.log("selectCroppedImg : ", selectCroppedImg)
         setDotTitle('')
-        if(selectCroppedImg['title'] != null){
+        if (selectCroppedImg['title'] != null) {
             setDotTitle(selectCroppedImg['title'])
         }
         setDotDescription('')
-        if(selectCroppedImg['description'] != null){
+        if (selectCroppedImg['description'] != null) {
             setDotDescription(selectCroppedImg['description'])
         }
     }, [selectCroppedImg])
@@ -103,16 +109,27 @@ const App = () => {
         imgsMarks[objIndex].description = dotDescription
         setDotTitle('')
         setDotDescription('')
+        setSelectCroppedImg([])
     };
 
     const deleteDot = () => {
         let objIndex = imgsMarks.findIndex((obj => (obj.imgId == selectCroppedImg.imgId && obj.dotX + obj.dotY == selectCroppedImg.dotX + selectCroppedImg.dotY)));
         imgsMarks.splice(objIndex, 1)
-        setImgsMarks([
-            ...imgsMarks
-        ])
+        setImgsMarks([...imgsMarks])
         setSelectCroppedImg([])
     };
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+          if (dotFormRef.current && !dotFormRef.current.contains(event.target)) {
+            setSelectCroppedImg([])
+          }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [dotFormRef]);
 
 
 
@@ -132,8 +149,9 @@ const App = () => {
 
             {
             selectCroppedImg.imgId != null && (
-                <form onSubmit={addDotDetail}>
-                    <div className="mb-3">
+                <div className='dot-detail-form'>
+                    <form onSubmit={addDotDetail} ref={dotFormRef}>
+                    <div className="dot-detail-form-element">
                         <label for="exampleInputEmail1" className="form-label">Title</label>
                         <input type="text" className="form-control" id="exampleInputEmail1"
                             value={dotTitle}
@@ -141,21 +159,23 @@ const App = () => {
                                 e => setDotTitle(e.target.value)
                             }/>
                     </div>
-                    <div className="mb-3">
+                    <div className="dot-detail-form-element">
                         <label for="exampleInputPassword1" className="form-label">Description</label>
-                        <input type="text" className="form-control" id="exampleInputPassword1"
-                            value={dotDescription}
+                        <textarea type="text" className="form-control" id="exampleInputPassword1"
+                        value={dotDescription}
                             onChange={
                                 e => setDotDescription(e.target.value)
                             }/>
                     </div>
 
-                    <button type="submit" className="btn btn-primary"
+                    <button type="submit" className="save-modal-btn"
                         disabled={
                             !dotTitle || !dotDescription
-                    }>Submit</button>
-                    <div onClick={deleteDot}>Delete Dot</div>
+                    }>Save</button>
+                    <div className='delete-dot-btn' onClick={deleteDot}>🗑</div>
+                    <div className='close-modal-btn' onClick={() => setSelectCroppedImg([])}>&#10006;</div>
                 </form>
+                </div>
             )
         }
 
@@ -196,7 +216,7 @@ const App = () => {
 
                         <button className='select-btn'
                             onClick={
-                                () => setBigImg(e)
+                                () => selectBigImg(e)
                         }>&#128070;</button>
 
                         <button className='delete-btn'

@@ -14,7 +14,7 @@ const CropDot = props => {
         const image = new Image();
         image.src = props.img['img'];
 
-        image.onload = function () { 
+        image.onload = function () {
             imgLeft = this.width / 100 * props.details.dotX
             imgTop = this.height / 100 * props.details.dotY
             context.clearRect(0, 0, canvas.width, canvas.height);

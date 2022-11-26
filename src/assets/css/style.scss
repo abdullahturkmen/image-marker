@@ -2,9 +2,87 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 body {
     background-color: #23252b;
+}
+
+.dot-detail-form {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: #18181873;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: clamp(260px, 50%, 540px);
+        position: relative;
+    }
+
+    &-element {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 14px;
+
+        label{
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .form-control{
+            padding: 5px 10px;
+        }
+    }
+    .save-modal-btn {
+        background-color: #005323;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:disabled, &.disabled{
+            background-color: #6c6c6c;
+            cursor: initial;
+        }
+    }
+    .delete-dot-btn {
+        width: fit-content;
+        background-color: red;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        float: right;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+    }
+    .close-modal-btn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #6c6c6c;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        aspect-ratio: 1;
+        width: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+    }
 }
 
 .file-upload {
@@ -84,7 +162,7 @@ body {
             background: #181818;
 
             &:hover {
-                box-shadow: 0 0 10px gray;
+                outline: 2px #0072ff solid;
                 cursor: pointer;
             }
         }
@@ -145,10 +223,15 @@ body {
     justify-content: center;
     gap: 10px;
     padding: 10px;
+    min-height: 70px;
 
-    canvas{
+    canvas {
         vertical-align: middle;
         cursor: pointer;
+
+        &:hover {
+            outline: 1px #0072ff solid;
+        }
     }
 }
 
