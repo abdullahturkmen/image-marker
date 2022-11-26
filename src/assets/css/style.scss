@@ -51,11 +51,12 @@ body {
 
         .canvas-dot {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 16px;
+            height: 16px;
             border-radius: 100%;
             background-color: #fff;
-            transform: translate(-5px, -5px);
+            box-shadow: 0 0 10px black;
+            transform: translate(-8px, -8px);
 
             &:before,
             &:after {
@@ -144,6 +145,11 @@ body {
     justify-content: center;
     gap: 10px;
     padding: 10px;
+
+    canvas{
+        vertical-align: middle;
+        cursor: pointer;
+    }
 }
 
 @keyframes drop {
