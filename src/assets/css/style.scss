@@ -8,6 +8,14 @@ body {
     background-color: #23252b;
 }
 
+.abdullah-turkmen {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    color: white;
+    z-index: 2;
+}
+
 .dot-detail-form {
     position: fixed;
     height: 100vh;
@@ -138,7 +146,7 @@ body {
             transform: translate(-8px, -8px);
 
             &.hover {
-                background-color: green;
+                background-color: #0072ff;
             }
 
             &:before,

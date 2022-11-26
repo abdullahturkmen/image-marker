@@ -144,6 +144,8 @@ const App = () => {
     return (
         <div className="App">
 
+            <a className='abdullah-turkmen' href='https://linkedin.com/in/abdullahturkmen'>created by Abdullah Türkmen</a>
+
             {
             selectedImgs ?. length < 1 && <div className="file-upload">
                 <button className="btn">Upload files &#43;</button>
