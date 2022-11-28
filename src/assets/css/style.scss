@@ -241,9 +241,33 @@ body {
     canvas {
         vertical-align: middle;
         cursor: pointer;
+        border-radius: 5px;
 
         &:hover {
             outline: 1px #0072ff solid;
+        }
+    }
+}
+
+.app-btns{
+    padding: 20px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    button{
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        &:nth-child(1){
+            background-color: #ff4343;
+        }
+        &:nth-child(2){
+            background-color: #085600;
+            color: #ffffff;
         }
     }
 }

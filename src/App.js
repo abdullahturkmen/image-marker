@@ -114,8 +114,12 @@ const App = () => {
     const addDotDetail = e => {
         e.preventDefault();
         let objIndex = imgsMarks.findIndex((obj => (obj.imgId == selectCroppedImg.imgId && obj.dotX + obj.dotY == selectCroppedImg.dotX + selectCroppedImg.dotY)));
-        imgsMarks[objIndex].title = dotTitle
-        imgsMarks[objIndex].description = dotDescription
+        if(dotTitle != null || dotTitle != ''){
+            imgsMarks[objIndex].title = dotTitle
+        }
+        if(dotDescription != null || dotDescription != ''){
+            imgsMarks[objIndex].description = dotDescription
+        }
         setDotTitle('')
         setDotDescription('')
         setSelectCroppedImg([])
@@ -140,6 +144,22 @@ const App = () => {
         };
     }, [dotFormRef]);
 
+    const clearApp = () => {
+        setSelectedFiles([])
+        setSelectedImgs([])
+        setSelectCroppedImg([])
+        setImgsMarks([])
+        setHoverCroppedImg([])
+        setBigImg(null)
+    };
+
+    const submitApp = () => {
+        console.log("app submit start ========")
+        console.log("images Marks : ", imgsMarks)
+        console.log("selected Images : ", selectedImgs)
+        console.log("app submit end ========")
+    };
+
 
     return (
         <div className="App">
@@ -163,7 +183,7 @@ const App = () => {
                     <form onSubmit={addDotDetail}
                         ref={dotFormRef}>
                         <div className="dot-detail-form-element">
-                            <label for="exampleInputEmail1" className="form-label">Title</label>
+                            <label htmlFor="exampleInputEmail1" className="form-label">Title</label>
                             <input type="text" className="form-control" id="exampleInputEmail1"
                                 value={dotTitle}
                                 onChange={
@@ -171,7 +191,7 @@ const App = () => {
                                 }/>
                         </div>
                         <div className="dot-detail-form-element">
-                            <label for="exampleInputPassword1" className="form-label">Description</label>
+                            <label htmlFor="exampleInputPassword1" className="form-label">Description</label>
                             <textarea type="text" className="form-control" id="exampleInputPassword1"
                                 value={dotDescription}
                                 onChange={
@@ -222,10 +242,11 @@ const App = () => {
             </>
         }
 
-
+{
+                selectedImgs ?. length > 0 && (<>
             <div className='selected-imgs'>
                 {
-                selectedImgs ?. length > 0 && selectedImgs.map((e, index) => (
+                selectedImgs.map((e, index) => (
 
                     <div className='item-img'
                         key={index}>
@@ -245,6 +266,14 @@ const App = () => {
                     </div>
                 ))
             } </div>
+            
+            
+            <div className='app-btns'>
+                <button onClick={() => clearApp()}>Clear</button>
+                <button onClick={() => submitApp()}>Submit</button>
+            </div>
+            
+            </>)}
 
 
         </div>
