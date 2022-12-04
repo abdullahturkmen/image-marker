@@ -52,6 +52,17 @@ const App = () => {
 
 
     const deleteImg = (id) => {
+        if (bigImg.id == selectedImgs[id].id) {
+            if (selectedImgs.length > 0) {
+                if (id > 0) {
+                    setBigImg(selectedImgs[id - 1])
+                } else {
+                    setBigImg(selectedImgs[id + 1])
+                }
+            } else {
+                setBigImg(null)
+            }
+        }
         selectedImgs.splice(id, 1)
         selectedFiles.splice(id, 1)
         setSelectedImgs([...selectedImgs]);
@@ -114,10 +125,10 @@ const App = () => {
     const addDotDetail = e => {
         e.preventDefault();
         let objIndex = imgsMarks.findIndex((obj => (obj.imgId == selectCroppedImg.imgId && obj.dotX + obj.dotY == selectCroppedImg.dotX + selectCroppedImg.dotY)));
-        if(dotTitle != null || dotTitle != ''){
+        if (dotTitle != null || dotTitle != '') {
             imgsMarks[objIndex].title = dotTitle
         }
-        if(dotDescription != null || dotDescription != ''){
+        if (dotDescription != null || dotDescription != '') {
             imgsMarks[objIndex].description = dotDescription
         }
         setDotTitle('')
@@ -242,41 +253,45 @@ const App = () => {
             </>
         }
 
-{
-                selectedImgs ?. length > 0 && (<>
-            <div className='selected-imgs'>
-                {
-                selectedImgs.map((e, index) => (
+            {
+            selectedImgs ?. length > 0 && (
+                <>
+                    <div className='selected-imgs'>
+                        {
+                        selectedImgs.map((e, index) => (
 
-                    <div className='item-img'
-                        key={index}>
-                        <img src={
-                            e['img']
-                        }/>
+                            <div className='item-img'
+                                key={index}>
+                                <img src={
+                                    e['img']
+                                }/>
 
-                        <button className='select-btn'
-                            onClick={
-                                () => selectBigImg(e)
-                        }>&#128070;</button>
+                                <button className='select-btn'
+                                    onClick={
+                                        () => selectBigImg(e)
+                                }>&#128070;</button>
 
-                        <button className='delete-btn'
-                            onClick={
-                                () => deleteImg(index)
-                        }>&times;</button>
+                                <button className='delete-btn'
+                                    onClick={
+                                        () => deleteImg(index)
+                                }>&times;</button>
+                            </div>
+                        ))
+                    } </div>
+
+
+                    <div className='app-btns'>
+                        <button onClick={
+                            () => clearApp()
+                        }>Clear</button>
+                        <button onClick={
+                            () => submitApp()
+                        }>Submit</button>
                     </div>
-                ))
-            } </div>
-            
-            
-            <div className='app-btns'>
-                <button onClick={() => clearApp()}>Clear</button>
-                <button onClick={() => submitApp()}>Submit</button>
-            </div>
-            
-            </>)}
 
-
-        </div>
+                </>
+            )
+        } </div>
     );
 }
 
