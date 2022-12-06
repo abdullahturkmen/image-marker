@@ -168,6 +168,7 @@ body {
                 animation: drop 1.5s linear 0.35s infinite;
             }
         }
+
         canvas {
             vertical-align: middle;
             transition: all 0.2s linear;
@@ -176,6 +177,19 @@ body {
             &:hover {
                 outline: 2px #0072ff solid;
                 cursor: pointer;
+            }
+        }
+
+        button{
+            position: absolute;
+            height: 100%;
+            width: 50px;
+
+            &:nth-of-type(1){
+                left: -50px;
+            }
+            &:nth-of-type(2) {
+                right: -50px;
             }
         }
     }
@@ -248,23 +262,23 @@ body {
     }
 }
 
-.app-btns{
+.app-btns {
     padding: 20px 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 
-    button{
+    button {
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 18px;
-        &:nth-child(1){
+        &:nth-child(1) {
             background-color: #ff4343;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
             background-color: #085600;
             color: #ffffff;
         }

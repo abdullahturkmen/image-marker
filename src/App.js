@@ -7,6 +7,8 @@ const App = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [selectedImgs, setSelectedImgs] = useState([]);
     const [bigImg, setBigImg] = useState(null);
+    const [bigImgLeftNav, setBigImgLeftNav] = useState(false);
+    const [bigImgRightNav, setBigImgRightNav] = useState(false);
     const [imgsMarks, setImgsMarks] = useState([]);
     const [selectCroppedImg, setSelectCroppedImg] = useState([]);
     const [hoverCroppedImg, setHoverCroppedImg] = useState([]);
@@ -40,7 +42,6 @@ const App = () => {
         })
     }, [selectedFiles]);
 
-
     const handleFileSelect = (event) => {
         setSelectedImgs([])
         const chosenFiles = Array.prototype.slice.call(event.target.files)
@@ -49,7 +50,6 @@ const App = () => {
             ... chosenFiles
         ]);
     }
-
 
     const deleteImg = (id) => {
         if (bigImg.id == selectedImgs[id].id) {
@@ -66,6 +66,7 @@ const App = () => {
         selectedImgs.splice(id, 1)
         selectedFiles.splice(id, 1)
         setSelectedImgs([...selectedImgs]);
+        bigImgNavigation()
     }
 
     const selectBigImg = (e) => {
@@ -80,7 +81,6 @@ const App = () => {
             Math.floor(Math.random() * 9999) + 123
         }`;
     }
-
 
     const handleCanvasCallback = (childData) => {
 
@@ -120,7 +120,6 @@ const App = () => {
             setDotDescription(selectCroppedImg['description'])
         }
     }, [selectCroppedImg])
-
 
     const addDotDetail = e => {
         e.preventDefault();
@@ -170,6 +169,48 @@ const App = () => {
         console.log("selected Images : ", selectedImgs)
         console.log("app submit end ========")
     };
+
+    useEffect(() => {
+        bigImgNavigation()
+    }, [bigImg]);
+
+    const bigImgNavigation = () => {
+        let bigImgIndexOf
+        if (selectedImgs.length > 0) {
+
+            selectedImgs.map((e, index) => {
+                if (e.id == bigImg.id) {
+                    bigImgIndexOf = index
+                }
+            })
+
+            setBigImgLeftNav(true)
+            setBigImgRightNav(true)
+
+            if (bigImgIndexOf == 0) {
+                setBigImgLeftNav(false)
+            }
+            if ((bigImgIndexOf + 1) == selectedImgs.length) {
+                setBigImgRightNav(false)
+            }
+        }
+    }
+
+    const handlePrevImgCallback = () => {
+        selectedImgs.map((e, index) => {
+            if (e.id == bigImg.id) {
+                setBigImg(selectedImgs[index - 1])
+            }
+        })
+    }
+
+    const handleNextImgCallback = () => {
+        selectedImgs.map((e, index) => {
+            if (e.id == bigImg.id) {
+                setBigImg(selectedImgs[index + 1])
+            }
+        })
+    }
 
 
     return (
@@ -244,12 +285,23 @@ const App = () => {
                     ))
                 } </div>
 
+              
                 <Canvas img={bigImg}
                     dots={imgsMarks}
                     croppedImgHover={hoverCroppedImg}
+                    bigImgLeftNav={bigImgLeftNav}
+                    bigImgRightNav={bigImgRightNav}
                     parentCallback={
                         (e) => handleCanvasCallback(e)
+                    }
+                    prevImgCallback={
+                        (e) => handlePrevImgCallback(e)
+                    }
+                    nextImgCallback={
+                        (e) => handleNextImgCallback(e)
                     }/>
+              
+
             </>
         }
 

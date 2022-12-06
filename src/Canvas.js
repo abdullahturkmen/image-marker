@@ -10,8 +10,6 @@ const Canvas = props => {
 
     useEffect(() => {
 
-        console.log("props", props)
-
         const canvas = canvasRef.current
         const context = canvas.getContext('2d')
 
@@ -45,6 +43,14 @@ const Canvas = props => {
         props.parentCallback({ imgId: props.img.id, dotX: (x * 100 / imgWidth), dotY: (y * 100 / imgHeight) });
     }
 
+    const handleBigImgPrevBtn = () => {
+        props.prevImgCallback()
+    }
+
+    const handleBigImgNextBtn = () => {
+        props.nextImgCallback()
+    }
+
     return (
         <>
             <div className='canvas-img'>
@@ -54,11 +60,19 @@ const Canvas = props => {
                             <div className={`canvas-dot ${(e.imgId == props.croppedImgHover.imgId && e.dotX + e.dotY == props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''}`} style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
                         ))
                     }
-
+                    <button disabled={
+                        !props.bigImgLeftNav
+                    }
+                        onClick={handleBigImgPrevBtn}>Önceki</button>
                     <canvas onClick={handleCanvasClick}
                         ref={canvasRef}
                         width="600px"
                         height="600px" />
+
+                    <button disabled={
+                        !props.bigImgRightNav
+                    }
+                        onClick={handleBigImgNextBtn}>Sonraki</button>
                 </div>
             </div>
         </>
