@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 
 const Canvas = props => {
@@ -37,10 +37,13 @@ const Canvas = props => {
 
 
     const handleCanvasClick = (event) => {
-        const rect = canvasRef.current.getBoundingClientRect()
-        const x = event.clientX - rect.left
-        const y = event.clientY - rect.top
-        props.parentCallback({ imgId: props.img.id, dotX: (x * 100 / imgWidth), dotY: (y * 100 / imgHeight) });
+        if (props.parentCallback) {
+            const rect = canvasRef.current.getBoundingClientRect()
+            const x = event.clientX - rect.left
+            const y = event.clientY - rect.top
+            props.parentCallback({ imgId: props.img.id, dotX: (x * 100 / imgWidth), dotY: (y * 100 / imgHeight) });
+        }
+
     }
 
     const handleBigImgPrevBtn = () => {
@@ -48,16 +51,18 @@ const Canvas = props => {
     }
 
     const handleBigImgNextBtn = () => {
+
         props.nextImgCallback()
     }
 
     return (
         <>
             <div className='canvas-img'>
-                <button disabled={
+                {props.bigImgLeftNav && (<button className='canvas-btn canvas-btn-prev' disabled={
                     !props.bigImgLeftNav
                 }
-                    onClick={handleBigImgPrevBtn}>&#8249;</button>
+                    onClick={handleBigImgPrevBtn}>&#8249;</button>)}
+
                 <div className='canvas-container'>
                     {
                         props.dots?.length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
@@ -70,10 +75,12 @@ const Canvas = props => {
                         width="600px"
                         height="600px" />
                 </div>
-                <button disabled={
-                    !props.bigImgRightNav
-                }
-                    onClick={handleBigImgNextBtn}>&#8250;</button>
+
+                {props.bigImgRightNav && (
+                    <button className='canvas-btn canvas-btn-next' disabled={
+                        !props.bigImgRightNav
+                    }
+                        onClick={handleBigImgNextBtn}>&#8250;</button>)}
 
             </div>
         </>

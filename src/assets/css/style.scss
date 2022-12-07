@@ -1,19 +1,14 @@
+@use "author";
+@use "demos";
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
 body {
     background-color: #23252b;
-}
-
-.abdullah-turkmen {
-    position: fixed;
-    bottom: 5px;
-    right: 5px;
-    color: white;
-    z-index: 2;
 }
 
 .dot-detail-form {
@@ -180,7 +175,7 @@ body {
             }
         }
     }
-    button {
+    .canvas-btn {
         position: absolute;
         height: 100%;
         width: 50px;
@@ -193,13 +188,13 @@ body {
         &:disabled,
         &.disabled {
             cursor: default;
-            opacity: .25;
+            opacity: 0.25;
         }
 
-        &:nth-of-type(1) {
+        &-prev {
             left: -50px;
         }
-        &:nth-of-type(2) {
+        &-next {
             right: -50px;
         }
     }

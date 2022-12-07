@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useRef, useEffect} from 'react'
 
 const CropDot = props => {
 
@@ -28,7 +28,9 @@ const CropDot = props => {
 
 
     const croppedImgClick = (e) => {
-        props.cropDotCallback(e)
+        if (props.cropDotCallback) {
+            props.cropDotCallback(e)
+        }
     }
 
 
