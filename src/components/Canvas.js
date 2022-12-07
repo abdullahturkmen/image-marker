@@ -54,26 +54,27 @@ const Canvas = props => {
     return (
         <>
             <div className='canvas-img'>
+                <button disabled={
+                    !props.bigImgLeftNav
+                }
+                    onClick={handleBigImgPrevBtn}>&#8249;</button>
                 <div className='canvas-container'>
                     {
                         props.dots?.length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
                             <div className={`canvas-dot ${(e.imgId == props.croppedImgHover.imgId && e.dotX + e.dotY == props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''}`} style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
                         ))
                     }
-                    <button disabled={
-                        !props.bigImgLeftNav
-                    }
-                        onClick={handleBigImgPrevBtn}>Önceki</button>
+
                     <canvas onClick={handleCanvasClick}
                         ref={canvasRef}
                         width="600px"
                         height="600px" />
-
-                    <button disabled={
-                        !props.bigImgRightNav
-                    }
-                        onClick={handleBigImgNextBtn}>Sonraki</button>
                 </div>
+                <button disabled={
+                    !props.bigImgRightNav
+                }
+                    onClick={handleBigImgNextBtn}>&#8250;</button>
+
             </div>
         </>
     )

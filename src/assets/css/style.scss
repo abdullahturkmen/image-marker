@@ -123,14 +123,13 @@ body {
 .canvas-img {
     width: 600px;
     margin: auto;
-    border: 1px solid rgb(145, 145, 145);
+    outline: 1px solid rgb(145, 145, 145);
     background-color: black;
-    border-radius: 10px;
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    position: relative;
 
     .canvas-container {
         position: relative;
@@ -173,24 +172,35 @@ body {
             vertical-align: middle;
             transition: all 0.2s linear;
             background: #181818;
+            border-radius: 10px;
 
             &:hover {
                 outline: 2px #0072ff solid;
                 cursor: pointer;
             }
         }
+    }
+    button {
+        position: absolute;
+        height: 100%;
+        width: 50px;
+        font-size: 4em;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        color: #fff;
 
-        button{
-            position: absolute;
-            height: 100%;
-            width: 50px;
+        &:disabled,
+        &.disabled {
+            cursor: default;
+            opacity: .25;
+        }
 
-            &:nth-of-type(1){
-                left: -50px;
-            }
-            &:nth-of-type(2) {
-                right: -50px;
-            }
+        &:nth-of-type(1) {
+            left: -50px;
+        }
+        &:nth-of-type(2) {
+            right: -50px;
         }
     }
 }
@@ -224,8 +234,8 @@ body {
             position: absolute;
             right: 5px;
             top: 5px;
-            background-color: red;
-            color: #fff;
+            background: transparent;
+            color: red;
             font-size: 18px;
             border: none;
             cursor: pointer;
@@ -234,7 +244,7 @@ body {
             position: absolute;
             left: 5px;
             top: 5px;
-            background-color: rgb(0, 129, 32);
+            background: transparent;
             color: #fff;
             font-size: 18px;
             border: none;
@@ -295,4 +305,3 @@ body {
         opacity: 0;
     }
 }
-

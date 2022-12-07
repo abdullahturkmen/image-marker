@@ -1,6 +1,6 @@
 import {useRef, useEffect, useState} from 'react';
-import Canvas from 'Canvas';
-import CropDot from 'CropDot';
+import Canvas from 'components/Canvas';
+import CropDot from 'components/CropDot';
 
 const App = () => {
 
@@ -216,7 +216,7 @@ const App = () => {
     return (
         <div className="App">
 
-            <a className='abdullah-turkmen' href='https://linkedin.com/in/abdullahturkmen'>created by Abdullah Türkmen</a>
+            <a className='abdullah-turkmen' href='https://linkedin.com/in/abdullahturkmen'>Created by Abdullah Türkmen</a>
 
             {
             selectedImgs ?. length < 1 && <div className="file-upload">
