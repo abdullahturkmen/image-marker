@@ -53,7 +53,7 @@ const Cropper = () => {
     }
 
     const deleteImg = (id) => {
-        if (bigImg.id == selectedImgs[id].id) {
+        if (bigImg.id === selectedImgs[id].id) {
             if (selectedImgs.length > 0) {
                 if (id > 0) {
                     setBigImg(selectedImgs[id - 1])
@@ -128,7 +128,7 @@ const Cropper = () => {
         if (dotTitle != null || dotTitle != '') {
             imgsMarks[objIndex].title = dotTitle
         }
-        if (dotDescription != null || dotDescription != '') {
+        if (dotDescription !== null || dotDescription !== '') {
             imgsMarks[objIndex].description = dotDescription
         }
         setDotTitle('')
@@ -137,7 +137,7 @@ const Cropper = () => {
     };
 
     const deleteDot = () => {
-        let objIndex = imgsMarks.findIndex((obj => (obj.imgId == selectCroppedImg.imgId && obj.dotX + obj.dotY == selectCroppedImg.dotX + selectCroppedImg.dotY)));
+        let objIndex = imgsMarks.findIndex((obj => (obj.imgId === selectCroppedImg.imgId && obj.dotX + obj.dotY === selectCroppedImg.dotX + selectCroppedImg.dotY)));
         imgsMarks.splice(objIndex, 1)
         setImgsMarks([...imgsMarks])
         setSelectCroppedImg([])
@@ -216,7 +216,7 @@ const Cropper = () => {
 
 
     return (
-        <div className="App">
+        <div className="App cropper">
 
             <Author/> {
             selectedImgs ?. length < 1 && <div className="file-upload">

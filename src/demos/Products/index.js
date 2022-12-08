@@ -18,13 +18,13 @@ const Products = () => {
 
 
     return (
-        <div className="App">
+        <div className="App demos">
 
             <Author/>
 
             <div className='crops'>
                 {
-                imgsMarks ?. length > 0 && imgsMarks.filter(e => e.imgId == bigImg.id).map((e, index) => (
+                imgsMarks?.length > 0 && imgsMarks.filter(e => e.imgId === bigImg.id).map((e, index) => (
                     <CropDot img={bigImg}
                         details={e}
                         key={index}

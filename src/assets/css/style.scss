@@ -11,292 +11,294 @@ body {
     background-color: #23252b;
 }
 
-.dot-detail-form {
-    position: fixed;
-    height: 100vh;
-    width: 100%;
-    background-color: #18181873;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    form {
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        width: clamp(260px, 50%, 540px);
-        position: relative;
-    }
-
-    &-element {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 14px;
-
-        label {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .form-control {
-            padding: 5px 10px;
-        }
-    }
-    .save-modal-btn {
-        background-color: #005323;
-        color: #fff;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-
-        &:disabled,
-        &.disabled {
-            background-color: #6c6c6c;
-            cursor: initial;
-        }
-    }
-    .delete-dot-btn {
-        width: fit-content;
-        background-color: red;
-        color: #fff;
-        font-size: 18px;
-        border: none;
-        cursor: pointer;
-        float: right;
-        width: 20px;
+.cropper {
+    .dot-detail-form {
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        background-color: #18181873;
+        z-index: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 5px;
-    }
-    .close-modal-btn {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        background-color: #6c6c6c;
-        color: #fff;
-        font-size: 18px;
-        border: none;
-        cursor: pointer;
-        aspect-ratio: 1;
-        width: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-    }
-}
 
-.file-upload {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: clamp(260px, 50%, 540px);
+            position: relative;
+        }
 
-    .btn {
-        border: 1px solid gray;
-        color: #2a2a2a;
-        background-color: rgb(255 255 255);
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .form-control {
-        font-size: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        opacity: 0;
-        cursor: pointer;
-    }
-}
+        &-element {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 14px;
 
-.canvas-img {
-    width: 600px;
-    margin: auto;
-    outline: 1px solid rgb(145, 145, 145);
-    background-color: black;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
-    .canvas-container {
-        position: relative;
-
-        .canvas-dot {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 100%;
-            background-color: #fff;
-            box-shadow: 0 0 10px black;
-            transform: translate(-8px, -8px);
-
-            &.hover {
-                background-color: #0072ff;
+            label {
+                font-size: 14px;
+                margin-bottom: 4px;
             }
 
-            &:before,
-            &:after {
-                content: "";
-                position: absolute;
-                aspect-ratio: 1/1;
-                top: 50%;
-                left: 50%;
-                background: #ffffffa8;
-                transition: all 0.8s linear;
-                transform: translate(-50%, -50%);
-                border-radius: 100%;
-            }
-
-            &:before {
-                animation: drop 1.5s linear 0s infinite;
-            }
-            &:after {
-                animation: drop 1.5s linear 0.35s infinite;
+            .form-control {
+                padding: 5px 10px;
             }
         }
-
-        canvas {
-            vertical-align: middle;
-            transition: all 0.2s linear;
-            background: #181818;
-            border-radius: 10px;
-
-            &:hover {
-                outline: 2px #0072ff solid;
-                cursor: pointer;
-            }
-        }
-    }
-    .canvas-btn {
-        position: absolute;
-        height: 100%;
-        width: 50px;
-        font-size: 4em;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-        color: #fff;
-
-        &:disabled,
-        &.disabled {
-            cursor: default;
-            opacity: 0.25;
-        }
-
-        &-prev {
-            left: -50px;
-        }
-        &-next {
-            right: -50px;
-        }
-    }
-}
-
-.selected-imgs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-
-    .item-img {
-        position: relative;
-        width: 100px;
-        aspect-ratio: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgb(145, 145, 145);
-        border-radius: 4px;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .delete-btn {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: transparent;
-            color: red;
-            font-size: 18px;
+        .save-modal-btn {
+            background-color: #005323;
+            color: #fff;
             border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
+
+            &:disabled,
+            &.disabled {
+                background-color: #6c6c6c;
+                cursor: initial;
+            }
         }
-        .select-btn {
-            position: absolute;
-            left: 5px;
-            top: 5px;
-            background: transparent;
+        .delete-dot-btn {
+            width: fit-content;
+            background-color: red;
             color: #fff;
             font-size: 18px;
             border: none;
             cursor: pointer;
+            float: right;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #6c6c6c;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            aspect-ratio: 1;
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
         }
     }
-}
 
-.crops {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    min-height: 70px;
+    .file-upload {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
 
-    canvas {
-        vertical-align: middle;
-        cursor: pointer;
-        border-radius: 5px;
-
-        &:hover {
-            outline: 1px #0072ff solid;
+        .btn {
+            border: 1px solid gray;
+            color: #2a2a2a;
+            background-color: rgb(255 255 255);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .form-control {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
         }
     }
-}
 
-.app-btns {
-    padding: 20px 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    .canvas-img {
+        width: 600px;
+        margin: auto;
+        outline: 1px solid rgb(145, 145, 145);
+        background-color: black;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
 
-    button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 18px;
-        &:nth-child(1) {
-            background-color: #ff4343;
+        .canvas-container {
+            position: relative;
+
+            .canvas-dot {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 100%;
+                background-color: #fff;
+                box-shadow: 0 0 10px black;
+                transform: translate(-8px, -8px);
+
+                &.hover, &:hover {
+                    background-color: #0072ff;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    aspect-ratio: 1/1;
+                    top: 50%;
+                    left: 50%;
+                    background: #ffffffa8;
+                    transition: all 0.8s linear;
+                    transform: translate(-50%, -50%);
+                    border-radius: 100%;
+                }
+
+                &:before {
+                    animation: drop 1.5s linear 0s infinite;
+                }
+                &:after {
+                    animation: drop 1.5s linear 0.35s infinite;
+                }
+            }
+
+            canvas {
+                vertical-align: middle;
+                transition: all 0.2s linear;
+                background: #181818;
+                border-radius: 10px;
+
+                &:hover {
+                    outline: 2px #0072ff solid;
+                    cursor: pointer;
+                }
+            }
         }
-        &:nth-child(2) {
-            background-color: #085600;
-            color: #ffffff;
+        .canvas-btn {
+            position: absolute;
+            height: 100%;
+            width: 50px;
+            font-size: 4em;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            color: #fff;
+
+            &:disabled,
+            &.disabled {
+                cursor: default;
+                opacity: 0.25;
+            }
+
+            &-prev {
+                left: -50px;
+            }
+            &-next {
+                right: -50px;
+            }
         }
     }
-}
 
-@keyframes drop {
-    from {
-        width: 0;
-        opacity: 1;
+    .selected-imgs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+
+        .item-img {
+            position: relative;
+            width: 100px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgb(145, 145, 145);
+            border-radius: 4px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .delete-btn {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                background: transparent;
+                color: red;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+            }
+            .select-btn {
+                position: absolute;
+                left: 5px;
+                top: 5px;
+                background: transparent;
+                color: #fff;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+            }
+        }
     }
-    to {
-        width: 250%;
-        opacity: 0;
+
+    .crops {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+        min-height: 70px;
+
+        canvas {
+            vertical-align: middle;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:hover {
+                outline: 1px #0072ff solid;
+            }
+        }
+    }
+
+    .app-btns {
+        padding: 20px 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            &:nth-child(1) {
+                background-color: #ff4343;
+            }
+            &:nth-child(2) {
+                background-color: #085600;
+                color: #ffffff;
+            }
+        }
+    }
+
+    @keyframes drop {
+        from {
+            width: 0;
+            opacity: 1;
+        }
+        to {
+            width: 250%;
+            opacity: 0;
+        }
     }
 }

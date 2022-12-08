@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, {useRef, useEffect} from 'react';
+import Marker from './Marker';
 
 
 const Canvas = props => {
@@ -18,6 +19,8 @@ const Canvas = props => {
 
         image.onload = function () {
 
+            console.log("canvas size : ", canvas.width)
+
             if (this.width > this.height) {
                 imgWidth = 600
                 imgHeight = 600 / (this.width / this.height)
@@ -31,6 +34,8 @@ const Canvas = props => {
 
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(image, 0, 0, this.width, this.height, 0, 0, imgWidth, imgHeight);
+
+            console.log("canvas size : ", canvas.width)
         }
 
     }, [props])
@@ -41,7 +46,11 @@ const Canvas = props => {
             const rect = canvasRef.current.getBoundingClientRect()
             const x = event.clientX - rect.left
             const y = event.clientY - rect.top
-            props.parentCallback({ imgId: props.img.id, dotX: (x * 100 / imgWidth), dotY: (y * 100 / imgHeight) });
+            props.parentCallback({
+                imgId: props.img.id,
+                dotX: (x * 100 / imgWidth),
+                dotY: (y * 100 / imgHeight)
+            });
         }
 
     }
@@ -58,31 +67,54 @@ const Canvas = props => {
     return (
         <>
             <div className='canvas-img'>
-                {props.bigImgLeftNav && (<button className='canvas-btn canvas-btn-prev' disabled={
-                    !props.bigImgLeftNav
-                }
-                    onClick={handleBigImgPrevBtn}>&#8249;</button>)}
+                {
+                props.bigImgLeftNav && (
+                    <button className='canvas-btn canvas-btn-prev'
+                        disabled={
+                            !props.bigImgLeftNav
+                        }
+                        onClick={handleBigImgPrevBtn}>&#8249;</button>
+                )
+            }
 
                 <div className='canvas-container'>
                     {
-                        props.dots?.length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
-                            <div className={`canvas-dot ${(e.imgId == props.croppedImgHover.imgId && e.dotX + e.dotY == props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''}`} style={{ left: `${e.dotX}%`, top: `${e.dotY}%` }} key={index} title={e.title}></div>
-                        ))
-                    }
+                    props.dots?.length > 0 && props.dots.filter(e => e.imgId === props.img.id).map((e, index) => (
+
+                        <Marker type={
+                                props.type
+                            }
+                            hover={
+                                `${
+                                    (e.imgId === props.croppedImgHover.imgId && e.dotX + e.dotY === props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''
+                                }`
+                            }
+                            left={
+                                e.dotX
+                            }
+                            top={
+                                e.dotY
+                            }
+                            key={index}
+                            details={
+                                e
+                            }/>
+                    ))
+                }
 
                     <canvas onClick={handleCanvasClick}
-                        ref={canvasRef}
-                        width="600px"
-                        height="600px" />
+                        ref={canvasRef}/>
                 </div>
 
-                {props.bigImgRightNav && (
-                    <button className='canvas-btn canvas-btn-next' disabled={
-                        !props.bigImgRightNav
-                    }
-                        onClick={handleBigImgNextBtn}>&#8250;</button>)}
-
-            </div>
+                {
+                props.bigImgRightNav && (
+                    <button className='canvas-btn canvas-btn-next'
+                        disabled={
+                            !props.bigImgRightNav
+                        }
+                        onClick={handleBigImgNextBtn}>&#8250;</button>
+                )
+            } </div>
         </>
     )
 }

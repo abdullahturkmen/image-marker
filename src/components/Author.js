@@ -42,17 +42,17 @@ const Author = () => {
                     </div>
                 </div>
                 <div className="contact linkedin">
-                    <a target="_blank" href="https://linkedin.com/in/abdullahturkmen">
+                    <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/abdullahturkmen">
                         <i className="fab fa-linkedin"></i>
                     </a>
                 </div>
                 <div className="contact github">
-                    <a target="_blank" href="https://github.com/abdullahturkmen">
+                    <a target="_blank" rel="noreferrer" href="https://github.com/abdullahturkmen">
                         <i className="fab fa-github"></i>
                     </a>
                 </div>
                 <div className="contact website">
-                    <a target="_blank" href="https://abdullahturkmen.com">
+                    <a target="_blank" rel="noreferrer" href="https://abdullahturkmen.com">
                         <i className="fa fa-globe"></i>
                     </a>
                 </div>

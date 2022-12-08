@@ -1,0 +1,87 @@
+.demos {
+    .canvas-img {
+        width: clamp(260px, 80%, 720px);
+        margin: auto;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+
+            .canvas-dot {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 100%;
+                background-color: #fff;
+                box-shadow: 0 0 10px black;
+                transform: translate(-8px, -8px);
+
+                &.hover, &:hover {
+                    background-color: #0072ff;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    aspect-ratio: 1/1;
+                    top: 50%;
+                    left: 50%;
+                    background: #ffffffa8;
+                    transition: all 0.8s linear;
+                    transform: translate(-50%, -50%);
+                    border-radius: 100%;
+                }
+
+                &:before {
+                    animation: drop 1.5s linear 0s infinite;
+                }
+                &:after {
+                    animation: drop 1.5s linear 0.35s infinite;
+                }
+            }
+
+            canvas {
+                vertical-align: middle;
+                transition: all 0.2s linear;
+                background: #181818;
+                width: 100%;
+            }
+        }
+    }
+
+    .crops {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+        min-height: 70px;
+
+        canvas {
+            vertical-align: middle;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:hover {
+                outline: 1px #0072ff solid;
+            }
+        }
+    }
+
+    @keyframes drop {
+        from {
+            width: 0;
+            opacity: 1;
+        }
+        to {
+            width: 250%;
+            opacity: 0;
+        }
+    }
+}
