@@ -1,5 +1,5 @@
 import Cropper from './cropper/Cropper';
-import Products from 'demos/Products';
+import Default from 'demos/Default';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -7,8 +7,8 @@ function App() {
     <Routes>
       <Route exact path='/'
         element={<Cropper />} />
-      <Route  path='/products'
-        element={<Products />} />
+      <Route  path='/default'
+        element={<Default />} />
     </Routes>
   );
 }

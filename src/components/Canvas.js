@@ -86,7 +86,7 @@ const Canvas = props => {
                             }
                             hover={
                                 `${
-                                    (e.imgId === props.croppedImgHover.imgId && e.dotX + e.dotY === props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''
+                                    (props.croppedImgHover && e.imgId === props.croppedImgHover.imgId && e.dotX + e.dotY === props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''
                                 }`
                             }
                             left={
