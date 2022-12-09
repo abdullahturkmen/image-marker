@@ -14,10 +14,12 @@ React JS projelerinizde image marker ekleme ve listeleme aracı
 
 - [Tooltip](https://image-marker.vercel.app/tooltip)
 
+- [Gallery](https://image-marker.vercel.app/gallery)
+
 ## TODO
 
 - [x] Tooltip 
-- [ ] Marker Galeri
+- [x] Marker Galeri
 
 ## Getting Started with Create React App
 

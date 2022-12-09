@@ -1,5 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import Marker from './Marker';
+import CropDot from './CropDot';
 
 
 const Canvas = props => {
@@ -67,6 +68,24 @@ const Canvas = props => {
     return (
         <>
             <div className='canvas-img'>
+
+                {
+                props.gallery && (
+                    <>
+                        <div className='crops'>
+                            {
+                            props.dots ?. length > 0 && props.dots.filter(e => e.imgId == props.img.id).map((e, index) => (
+                                <CropDot img={
+                                        props.img
+                                    }
+                                    details={e}
+                                    key={index}/>
+                            ))
+                        } </div>
+                    </>
+                )
+            }
+
                 {
                 props.bigImgLeftNav && (
                     <button className='canvas-btn canvas-btn-prev'
@@ -79,11 +98,12 @@ const Canvas = props => {
 
                 <div className='canvas-container'>
                     {
-                    props.dots?.length > 0 && props.dots.filter(e => e.imgId === props.img.id).map((e, index) => (
+                    props.dots ?. length > 0 && props.dots.filter(e => e.imgId === props.img.id).map((e, index) => (
 
                         <Marker type={
                                 props.type
                             }
+
                             hover={
                                 `${
                                     (props.croppedImgHover && e.imgId === props.croppedImgHover.imgId && e.dotX + e.dotY === props.croppedImgHover.dotX + props.croppedImgHover.dotY) ? 'hover' : ''
@@ -96,9 +116,7 @@ const Canvas = props => {
                                 e.dotY
                             }
                             key={index}
-                            details={
-                                e
-                            }/>
+                            details={e}/>
                     ))
                 }
 

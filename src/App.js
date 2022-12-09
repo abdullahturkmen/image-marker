@@ -3,6 +3,7 @@ import Cropper from './cropper/Cropper';
 import Default from 'demos/Default';
 import MultiCanvas from 'demos/MultiCanvas';
 import Tooltip from 'demos/Tooltip';
+import Gallery from 'demos/Gallery';
 
 function App() {
     return (
@@ -15,6 +16,8 @@ function App() {
                 element={<MultiCanvas/>}/>
             <Route path='/tooltip'
                 element={<Tooltip/>}/>
+            <Route path='/gallery'
+                element={<Gallery/>}/>
         </Routes>
     );
 }

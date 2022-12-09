@@ -35,11 +35,15 @@ const CropDot = props => {
 
 
     const handleCanvasMouseEnter = () => {
-        props.cropDotMouseEnterCallback(props.details)
+        if(props.cropDotMouseEnterCallback){
+            props.cropDotMouseEnterCallback(props.details)
+        }
     }
 
     const handleCanvasMouseLeave = () => {
-        props.cropDotMouseLeaveCallback(props.details)
+        if(props.cropDotMouseLeaveCallback){
+            props.cropDotMouseLeaveCallback(props.details)
+        }
     }
 
 
